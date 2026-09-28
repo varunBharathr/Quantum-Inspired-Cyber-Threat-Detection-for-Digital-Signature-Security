@@ -1,0 +1,162 @@
+{
+  "scheme": "EDU-QDS-TELEPORT-v1",
+  "disclaimer": "Educational simulation. Not a standardized or formally proven QDS protocol.",
+  "message_hash": "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969",
+  "hash_algorithm": "SHA-256",
+  "selected_hash_bits": "0001100001011111",
+  "encoding": {
+    "n_qubits": 8,
+    "bits_per_qubit": 2,
+    "mapping": "00:|0>(0) 01:|1>(pi) 10:|+>(pi/2) 11:|->(-pi/2), state=Ry(theta)|0>"
+  },
+  "qubit_records": [
+    {
+      "index": 0,
+      "bits": "00",
+      "basis": "Z",
+      "label": "|0>",
+      "theta": 0.0,
+      "alice_m0": 0,
+      "alice_m1": 1,
+      "bob_bloch": [
+        0.0,
+        -0.0,
+        1.0
+      ],
+      "fidelity": 1.0
+    },
+    {
+      "index": 1,
+      "bits": "01",
+      "basis": "Z",
+      "label": "|1>",
+      "theta": 3.141592653589793,
+      "alice_m0": 0,
+      "alice_m1": 0,
+      "bob_bloch": [
+        0.0,
+        -0.0,
+        -1.0
+      ],
+      "fidelity": 1.0
+    },
+    {
+      "index": 2,
+      "bits": "10",
+      "basis": "X",
+      "label": "|+>",
+      "theta": 1.5707963267948966,
+      "alice_m0": 0,
+      "alice_m1": 1,
+      "bob_bloch": [
+        1.0,
+        -0.0,
+        0.0
+      ],
+      "fidelity": 1.0
+    },
+    {
+      "index": 3,
+      "bits": "00",
+      "basis": "Z",
+      "label": "|0>",
+      "theta": 0.0,
+      "alice_m0": 0,
+      "alice_m1": 0,
+      "bob_bloch": [
+        0.0,
+        -0.0,
+        1.0
+      ],
+      "fidelity": 1.0
+    },
+    {
+      "index": 4,
+      "bits": "01",
+      "basis": "Z",
+      "label": "|1>",
+      "theta": 3.141592653589793,
+      "alice_m0": 1,
+      "alice_m1": 1,
+      "bob_bloch": [
+        0.0,
+        -0.0,
+        -1.0
+      ],
+      "fidelity": 1.0
+    },
+    {
+      "index": 5,
+      "bits": "01",
+      "basis": "Z",
+      "label": "|1>",
+      "theta": 3.141592653589793,
+      "alice_m0": 1,
+      "alice_m1": 1,
+      "bob_bloch": [
+        0.0,
+        -0.0,
+        -1.0
+      ],
+      "fidelity": 1.0
+    },
+    {
+      "index": 6,
+      "bits": "11",
+      "basis": "X",
+      "label": "|->",
+      "theta": -1.5707963267948966,
+      "alice_m0": 1,
+      "alice_m1": 1,
+      "bob_bloch": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "fidelity": 1.0
+    },
+    {
+      "index": 7,
+      "bits": "11",
+      "basis": "X",
+      "label": "|->",
+      "theta": -1.5707963267948966,
+      "alice_m0": 1,
+      "alice_m1": 0,
+      "bob_bloch": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "fidelity": 1.0
+    }
+  ],
+  "quantum_measurements": {
+    "alice_bell_measurements_m1m0": [
+      "10",
+      "00",
+      "10",
+      "00",
+      "11",
+      "11",
+      "11",
+      "01"
+    ]
+  },
+  "teleportation_results": {
+    "channel": "normal",
+    "mean_fidelity": 1.0,
+    "min_fidelity": 1.0,
+    "all_qubits_passed": true
+  },
+  "metadata": {
+    "created_utc": "2026-09-28T12:10:13.284288+00:00",
+    "simulator": "qiskit_aer.AerSimulator",
+    "seed": 1000,
+    "versions": {
+      "qiskit": "2.5.2",
+      "qiskit_aer": "0.17.2"
+    }
+  },
+  "signature_checksum": "3271e6554ddcb4ec69e14909e3f679d30bfb29eb5c0b7de58fa8c5dd22011bca"
+}
