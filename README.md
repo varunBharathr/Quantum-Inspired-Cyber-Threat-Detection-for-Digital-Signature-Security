@@ -1,3 +1,4 @@
+HEAD
 # Educational Quantum Digital Signature (QDS) Simulator
 
 > **This is an educational simulation, not a formally proven or standardized QDS protocol.**
@@ -104,3 +105,7 @@ compared (they differ every run by design); the deterministic reconstructed stat
 Add a secret key (e.g. HMAC or a real signature scheme) for authenticity; noise models
 (`qiskit_aer.noise`); multiple attack bases (random-basis interception); more hash bits / qubits;
 swap-test based state comparison; Flask/React front-end.
+
+# Quantum-Inspired-Cyber-Threat-Detection-for-Digital-Signature-Security
+A simulation-based QDS security assessment framework that detects threats, discovers verification failure boundaries, and experimentally measures improvements in security verification.
+ a42883a13d0a9aa187d63ec01353d474890bdbb5
