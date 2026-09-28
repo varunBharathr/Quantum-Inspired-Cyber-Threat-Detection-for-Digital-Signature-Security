@@ -1,111 +1,702 @@
-HEAD
-# Educational Quantum Digital Signature (QDS) Simulator
+QDS-SAFE — Quantum Digital Signature Security Assessment & Threat Detection Framework
 
-> **This is an educational simulation, not a formally proven or standardized QDS protocol.**
-> It demonstrates how quantum-teleportation concepts can be wired into a
-> signature-*like* workflow. It must not be used to protect real data.
+SIH 2026 Problem Statement: SIH26141
+Title: Quantum-Inspired Cyber Threat Detection for Digital Signature Security
+Type: Simulation-based cybersecurity software prototype
 
-## 1. What the project does
-Takes a message, hashes it with SHA-256, turns selected hash bits into qubit states,
-teleports those qubits with a simulated circuit, stores the results as a structured
-"signature" record, and later verifies a message against it. It also simulates
-message tampering, an intercept/measure attack, and a protocol fault (no Bob correction),
-and reports the outcome with a rule-based threat analysis.
+1. Overview
 
-## 2. Why teleportation?
-Teleportation moves an unknown qubit state using a shared Bell pair plus two classical
-bits. It is a compact, testable way to show *entanglement*, *measurement*, *classical
-communication* and *fidelity*. Teleportation does **not** by itself create a secure
-digital signature - it is the quantum building block this prototype experiments with.
+QDS-SAFE is a simulation-based framework for experimentally assessing the security and verification behaviour of a quantum-digital-signature-like workflow.
 
-## 3. What "QDS" means here
-The signature is a record bundling four different things:
-| Layer | Meaning |
-|---|---|
-| classical hash | SHA-256 of the message (`hashlib`) |
-| quantum states | 8 qubits encoded from the first 16 hash bits |
-| teleportation data | Alice's Bell-measurement bits, Bob's Bloch vectors, fidelities |
-| QDS signature | the JSON record combining the above plus a SHA-256 checksum |
+The current prototype combines:
 
-A bare SHA-256 hash is **not** called a quantum signature anywhere in this project.
+SHA-256 message processing
 
-## 4. Architecture
-```
+deterministic quantum-state encoding
+
+Bell-state entanglement
+
+quantum teleportation
+
+Pauli correction
+
+projective measurement
+
+structured signature records
+
+deterministic verification
+
+controlled attack/fault simulations
+
+rule-based threat analysis
+
+reproducible experiment logging
+
+Important: This is an educational simulation, not a formally proven or standardized QDS protocol. Teleportation does not by itself create a secure digital signature.
+
+2. SIH Alignment
+
+The intended SIH workflow is:
+
+Message
+  ↓
+Quantum-state preparation
+  ↓
+Bell-state / entanglement
+  ↓
+Teleportation + Pauli correction
+  ↓
+Measurement / verification
+  ↓
+Legitimate baseline
+  ↓
+Controlled attack / noise injection
+  ↓
+Feature extraction
+  ↓
+Statistical / threshold analysis
+  ↓
+Security decision
+  ↓
+Failure localization
+  ↓
+Detection-boundary analysis
+  ↓
+Improved verification
+  ↓
+Re-test
+
+The current codebase implements the quantum simulation, signature-like record, verification checks and basic attack/fault experiments. The baseline-calibrated statistical layer, broader attack matrix and detection-boundary experiments are the next development layer.
+
+3. Scope and Terminology
+
+The project does not claim to implement a standardized production QDS protocol.
+
+The current model:
+
+hashes a message with SHA-256;
+
+selects 16 hash bits;
+
+converts each 2-bit pair into one of |0>, |1>, |+>, |->;
+
+teleports the resulting 8 qubits;
+
+records teleportation information;
+
+verifies the message and quantum reconstruction;
+
+runs controlled attack/fault experiments.
+
+A SHA-256 hash is not called a quantum signature. The structured JSON record is a simulation artefact, not a standardized QDS signature format.
+
+4. Quantum Model
+
+Encoding
+
+Bits
+
+State
+
+00
+
+`
+
+0>`
+
+01
+
+`
+
+1>`
+
+10
+
+`
+
++>`
+
+11
+
+`
+
+->`
+
+The states are prepared using the corresponding Ry(theta)|0> representation.
+
+Teleportation
+
+Input qubit
+    ↓
+Shared Bell pair
+    ↓
+Bell measurement
+    ↓
+Two classical bits
+    ↓
+Pauli correction
+    ↓
+Bob's qubit
+    ↓
+Measurement
+
+The simulator records Bell-measurement bits, Bob's reconstructed Bloch vector and teleportation fidelity.
+
+5. Signature Record
+
+The record contains:
+
+Layer
+
+Meaning
+
+Classical hash
+
+SHA-256 digest
+
+Quantum states
+
+8 states derived from selected hash bits
+
+Teleportation data
+
+measurement bits, Bloch vectors, fidelity
+
+Record integrity
+
+SHA-256 checksum
+
+This record demonstrates an experimental signature-like workflow; it does not provide production cryptographic authentication.
+
+6. Verification
+
+The current verifier performs six checks:
+
+Record checksum
+
+SHA-256 message match
+
+Selected hash-bit match
+
+State encoding match
+
+Teleportation re-run fidelity
+
+Bob's reconstructed Bloch-vector comparison
+
+ALL CHECKS PASS → VALID
+
+ANY CHECK FAILS → VERIFICATION FAILURE
+
+Teleportation fidelity alone is not treated as proof of message integrity.
+
+7. Threat Model
+
+QDS-SAFE separates adversarial attacks from ordinary degradation.
+
+Adversarial scenarios
+
+Forgery
+
+Impersonation
+
+Replay
+
+Unauthorized verification
+
+Quantum-channel manipulation
+
+Repudiation-related scenarios
+
+Non-adversarial degradation
+
+Channel loss
+
+Measurement error
+
+Gate noise
+
+Depolarizing noise
+
+Bit-flip noise
+
+Phase-flip noise
+
+Ordinary noise is not automatically labelled as an attack.
+
+8. Current Attack Experiments
+
+Message tampering
+
+Changing the message causes SHA-256 and encoding mismatches. Teleporting the tampered message can still have high fidelity, demonstrating why one quantum metric cannot be the only verification signal.
+
+Educational intercept/measurement attack
+
+The current experiment measures Bob's half of the Bell pair in the Z basis. This is a simplified attack model, not a complete model of quantum attacks. X-basis states can show reduced fidelity under this disturbance.
+
+Missing Bob correction
+
+Removing Bob's Pauli correction is used as a protocol-fault control experiment and should reduce reconstruction fidelity.
+
+9. Security-Assessment Layer
+
+The intended SIH extension is:
+
+             LEGITIMATE QDS
+                    ↓
+            BASELINE CALIBRATION
+                    ↓
+        ┌───────────┴───────────┐
+        ↓                       ↓
+    ATTACK LAB              NOISE LAB
+        └───────────┬───────────┘
+                    ↓
+           MEASUREMENT ENGINE
+                    ↓
+           STATISTICAL ENGINE
+                    ↓
+           SECURITY DECISION
+                    ↓
+            FAILURE ANALYZER
+                    ↓
+           DETECTION BOUNDARY
+                    ↓
+           IMPROVED PROFILE
+                    ↓
+                 RE-TEST
+
+10. Features to Measure
+
+Teleportation fidelity
+
+Measurement error rate
+
+Bell-state correlation
+
+X/Y/Z measurement statistics
+
+Verification outcome
+
+Attack/no-attack ground truth
+
+Runtime
+
+Sample size
+
+Measurement/test-round cost
+
+Suggested experiment record:
+
+experiment_id
+seed
+attack_type
+attack_strength
+noise_type
+noise_strength
+measurement_basis
+sample_size
+fidelity
+error_rate
+correlation
+x_stat
+y_stat
+z_stat
+decision
+ground_truth
+
+11. Statistical Detection
+
+Do not use arbitrary rules such as error > 10% = attack.
+
+Instead:
+
+H0: observed behaviour is consistent with legitimate QDS behaviour.
+
+H1: observed behaviour significantly deviates from legitimate QDS behaviour.
+
+Candidate methods include:
+
+confidence intervals
+
+binomial confidence intervals
+
+chi-square goodness-of-fit where appropriate
+
+bootstrap confidence intervals
+
+baseline-relative distribution comparisons
+
+Thresholds must be calibrated from legitimate baseline experiments.
+
+12. Detection Boundary
+
+The main experimental question is:
+
+At what attack/disturbance level does malicious behaviour become statistically distinguishable from legitimate system variation?
+
+The final graph must use measured data. No numerical detection curve is claimed until the attack sweep has been executed.
+
+13. False-Negative Analysis
+
+Attack occurs
+    ↓
+Detector says legitimate
+    ↓
+FALSE NEGATIVE
+    ↓
+Analyse why
+    ↓
+Change verification configuration
+    ↓
+Re-test
+    ↓
+Measure FNR change
+
+This is a core part of the security assessment.
+
+14. Verification Profiles
+
+Profiles are experimental operating points, not universal security rankings.
+
+Fast
+
+Lower measurement/test volume and faster verification.
+
+Balanced
+
+Moderate measurement coverage.
+
+High-Assurance
+
+Higher measurement coverage and stricter statistical evidence.
+
+Compare:
+
+detection rate
+
+false-positive rate
+
+false-negative rate
+
+runtime
+
+sample/measurement cost
+
+15. Experiment Matrix
+
+Profile
+
+Clean
+
+Noisy
+
+Attack
+
+Fast
+
+✓
+
+✓
+
+✓
+
+Balanced
+
+✓
+
+✓
+
+✓
+
+High-Assurance
+
+✓
+
+✓
+
+✓
+
+Vary:
+
+attack strength
+
+noise strength
+
+sample size
+
+measurement basis
+
+verification profile
+
+16. Quantitative Evaluation
+
+Detection Rate
+
+DR = detected attacks / total attacks
+
+False Positive Rate
+
+FPR = false alarms / legitimate trials
+
+False Negative Rate
+
+FNR = missed attacks / attack trials
+
+Also measure:
+
+teleportation fidelity
+
+verification error rate
+
+legitimate rejection/abort probability
+
+runtime
+
+computational cost
+
+measurement/sample cost
+
+Do not publish values until they have been experimentally measured.
+
+17. Confusion Matrix
+
+                         PREDICTED
+                    Legitimate   Attack
+
+ACTUAL
+Legitimate              TN          FP
+Attack                  FN          TP
+
+The FN case is particularly important because it represents an attack that escaped detection.
+
+18. Failure Report
+
+The final dashboard/report should answer:
+
+Test ID: QDS-XXXX
+Profile: Balanced
+Scenario: [INSERT EXPERIMENT]
+
+Fidelity:          [INSERT]
+Error Rate:        [INSERT]
+Correlation:       [INSERT]
+X/Y/Z deviation:   [INSERT]
+
+Statistical Result:[INSERT]
+
+Decision:          [Healthy / Degraded / Suspicious / Attack]
+
+Failure Location:  [Protocol / Channel / Measurement / Verification]
+
+Contributing Condition:
+[INSERT EXPERIMENTAL EXPLANATION]
+
+Next Experiment:
+[INSERT]
+
+Re-test Result:
+[INSERT EXPERIMENTAL RESULT]
+
+19. Architecture
+
 Quantum_Digital_Signature/
-├── test_quantum.py            ORIGINAL working teleportation program (UNTOUCHED)
+├── test_quantum.py
 ├── teleportation/
-│   ├── teleportation.py       adapter: imports test_quantum, teleport_state(theta)
-│   └── intercept.py           intercept/measure attack circuit (Qiskit)
-├── qds/                       (no Qiskit imports in here)
-│   ├── config.py              constants, thresholds, seeds
-│   ├── message.py             message -> bytes -> SHA-256 -> bits
-│   ├── quantum_encoding.py    hash bits -> qubit states
-│   ├── signature.py           signature generation / save / load
-│   ├── verification.py        6-check verifier
-│   ├── attacks.py             tampering, channel modes, normal-vs-attacked
-│   ├── threat_analysis.py     rule-based PASS/FAIL analysis
-│   ├── security_suite.py      the 4 required tests + summary table
-│   └── logger.py              [01].. / [ATTACK] logs
-├── tests/test_qds.py          pytest suite
-├── signatures/                saved signature JSON files
-├── main.py                    CLI menu
-├── requirements.txt  pytest.ini  README.md
-```
+│   ├── teleportation.py
+│   └── intercept.py
+├── qds/
+│   ├── config.py
+│   ├── message.py
+│   ├── quantum_encoding.py
+│   ├── signature.py
+│   ├── verification.py
+│   ├── attacks.py
+│   ├── threat_analysis.py
+│   ├── security_suite.py
+│   └── logger.py
+├── tests/
+│   └── test_qds.py
+├── signatures/
+├── main.py
+├── requirements.txt
+├── pytest.ini
+└── README.md
 
-## 5. Installation (Windows PowerShell, inside the project folder)
-```powershell
+20. Technology Stack
+
+Python
+├── Qiskit       → quantum-circuit simulation
+├── NumPy/SciPy  → numerical/statistical analysis
+├── Pandas       → experiment datasets
+├── Matplotlib/
+│   Plotly       → experiment visualization
+└── Streamlit    → security dashboard
+
+21. Reproducibility
+
+Experiments should record:
+
+seed
+
+experiment ID
+
+attack/noise configuration
+
+measurement basis
+
+sample size
+
+verification profile
+
+measured outputs
+
+ground truth
+
+QDS-SAFE generates a controlled experimental dataset. It does not claim to use a real-world QDS attack dataset unless one is explicitly added and documented.
+
+22. Installation
+
+Windows PowerShell
+
 python -m venv venv
-.\venv\Scripts\Activate.ps1
+.env\Scripts\Activate.ps1
 pip install -r requirements.txt
-```
-(If activation is blocked: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`.)
 
-## 6. Running
-```powershell
-python main.py              # the QDS simulator menu
-python test_quantum.py      # your original teleportation demo, unchanged
-python -m pytest -v         # automated tests
-```
+If activation is blocked:
 
-## 7. Signature-generation flow
-1. Message received -> UTF-8 bytes -> SHA-256.
-2. First 16 hash bits selected (deterministic).
-3. Each 2-bit pair -> one qubit: `00:|0>  01:|1>  10:|+>  11:|->`, prepared as `Ry(theta)|0>`.
-4. Each qubit is teleported with the original circuit (Bell pair, Bell measurement, X/Z correction).
-5. Alice's bits, Bob's reconstructed Bloch vector and the fidelity are recorded per qubit.
-6. The record gets a SHA-256 checksum and is saved to `signatures/last_signature.json`.
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
-## 8. Verification flow (six independent checks)
-Record checksum · SHA-256 match · selected bits match · state encoding match ·
-teleportation re-run fidelity >= 0.999999 · Bob's re-run Bloch vectors equal the recorded ones.
-The signature is valid only if **all six** pass. Alice's random measurement bits are *not*
-compared (they differ every run by design); the deterministic reconstructed state is.
+23. Running
 
-## 9. Attack simulation
-* **Message tampering** - `HELLO CKCET` -> `HELLO CKCET 123`: SHA-256 mismatch, Bloch/encoding mismatch.
-  Note that teleporting the tampered message's states still has fidelity ~1: teleportation is
-  working fine, so the hash/record checks are what catch this. That is why one check is never enough.
-* **Educational intercept/measurement attack simulation** - Eve measures Bob's half of the Bell pair in
-  the Z basis. This breaks the entanglement. |0>/|1> survive (fidelity 1.0); |+>/|-> drop to 0.5.
-  For `HELLO CKCET` four of the eight qubits are X-basis, so the attack is detected.
-  It is one simplified strategy, **not** every possible quantum attack.
-* **No Bob correction** - protocol fault control: fidelity drops, verification fails.
+python main.py
+python test_quantum.py
+python -m pytest -v
 
-## 10. Limitations
-* No secret/public key: anyone can generate a "valid" signature for any message. This shows
-  integrity checking, **not authenticity or non-repudiation**.
-* The verifier recomputes states from the message, so the "quantum data" is reproducible, not a
-  one-time quantum token; real QDS schemes (e.g. Gottesman-Chuang) use quantum public keys.
-* Intercept detection needs at least one X-basis qubit; a message whose 16 selected bits are all
-  Z-basis (probability 1/256) would pass the interception test. The hash check still works.
-* Ideal, noiseless simulator; only one attack model; no formal security proof; 16 of 256 hash bits
-  feed the quantum part (the full hash is still compared classically).
+24. Recommended SIH Demo
 
-## 11. Future improvements
-Add a secret key (e.g. HMAC or a real signature scheme) for authenticity; noise models
-(`qiskit_aer.noise`); multiple attack bases (random-basis interception); more hash bits / qubits;
-swap-test based state comparison; Flask/React front-end.
+1. CLEAN QDS
+   → VERIFIED
 
-# Quantum-Inspired-Cyber-Threat-Detection-for-Digital-Signature-Security
-A simulation-based QDS security assessment framework that detects threats, discovers verification failure boundaries, and experimentally measures improvements in security verification.
- a42883a13d0a9aa187d63ec01353d474890bdbb5
+2. MESSAGE / REPLAY TAMPERING
+   → DETECTED
+
+3. CHANNEL MANIPULATION
+   → STATISTICAL DEVIATION
+
+4. LOWER ATTACK STRENGTH
+   → FALSE NEGATIVE
+
+5. CHANGE VERIFICATION PROFILE
+   → RE-TEST
+
+6. ATTACK STRENGTH SWEEP
+   → DETECTION BOUNDARY + FNR CHANGE
+
+25. Security-Property Mapping
+
+Requirement
+
+QDS-SAFE treatment
+
+Unforgeability
+
+Forgery experiments + verification mismatch
+
+Repudiation resistance
+
+Repudiation-oriented experiments; protocol-specific implementation required
+
+Transferability
+
+Future protocol-specific extension
+
+Replay resistance
+
+Replay scenario and protocol-state checks
+
+Impersonation resistance
+
+Participant/authentication scenario
+
+Unauthorized verification
+
+Verification/access scenario
+
+Quantum-channel integrity
+
+Channel manipulation experiments
+
+26. Proposed Contribution
+
+The project does not claim that quantum teleportation or QDS itself is novel.
+
+The proposed software contribution is the integrated assessment workflow:
+
+controlled attack + noise stress testing
+
+legitimate-baseline calibration
+
+statistical threat detection
+
+detection-boundary discovery
+
+false-negative analysis
+
+failure localization
+
+verification-profile comparison
+
+improvement → re-test
+
+reproducible experiment generation
+
+This should be presented as a proposed software assessment workflow, not as a claim that no prior research performs similar activities.
+
+27. Limitations
+
+Simulation-based evaluation
+
+Depends on the selected QDS-like model
+
+Simulator noise does not reproduce every hardware effect
+
+Statistical thresholds depend on baseline calibration
+
+Current core verifier is deterministic/rule-based
+
+The current educational intercept attack is only one attack strategy
+
+No secret/public key in the current model
+
+No formal security proof
+
+Real-device validation is future work
+
+Experimental performance values must be generated before being claimed
+
+28. Roadmap
+
+Phase 1 — Foundation
+
+Quantum encoding, teleportation, verification and basic attack experiments.
+
+Phase 2 — SIH Security Layer
+
+Baseline generation, noise models, expanded attack library, statistical detection and experiment matrix.
+
+Phase 3 — Security Analysis
+
+Detection-boundary sweep, false-negative search, confusion matrix and failure localization.
+
+Phase 4 — Hardware Validation
+
+Compare simulator results with selected real quantum-hardware experiments.
+
+Phase 5 — Broader QDS Evaluation
+
+Support additional QDS constructions and protocol-specific benchmarking.
+
+29. Final Project Statement
+
+QDS-SAFE is a reproducible simulation framework for experimentally evaluating the security behaviour of a quantum-digital-signature-like workflow. It combines quantum teleportation, controlled attack/noise injection, baseline-calibrated statistical analysis, failure localization and verification re-testing to study where and under what conditions QDS verification becomes unreliable.
+
